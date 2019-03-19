@@ -13,4 +13,21 @@ router.get('/', (req, res) => {
     })
 });
 
+router.post('/', (req, res) => {
+    let emp = new Employee({
+        name: req.body.name,
+        position: req.body.position,
+        office: req.body.office,
+        salary: req.body.salary
+    });
+
+    emp.save((err, docs) => {
+        if (!err) {
+            res.send(docs);
+        } else {
+            console.log('Error on saving employee', JSON.stringify(err));
+        }
+    })
+});
+
 module.exports = router;
