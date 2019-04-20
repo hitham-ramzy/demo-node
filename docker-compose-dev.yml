@@ -1,0 +1,16 @@
+version: '3'
+services:
+        mongodb:
+                image: mongo
+        node-server:
+                build:
+                        dockerfile: docker/Dockerfile-dev
+                        context: .
+                ports:
+                       - "3999:3000"
+                restart: always
+                volumes:
+                  - /usr/app/node/node_modules
+                  - .:/usr/app/node
+                depends_on:
+                        - mongodb

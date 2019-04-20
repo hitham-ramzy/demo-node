@@ -1,0 +1,14 @@
+FROM node:latest
+
+# Install nodemon globally
+RUN npm i nodemon -g
+
+WORKDIR /usr/app/node/
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+CMD ["nodemon", "."]
