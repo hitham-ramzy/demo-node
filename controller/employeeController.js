@@ -5,6 +5,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 let {Employee} = require('../model/employee');
 
 router.get('/', (req, res) => {
+    console.log('trying to get all employeess');
     Employee.find((err, docs) => {
         if (!err) {
             return res.send(docs);
@@ -16,6 +17,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
+    console.log('trying to fet an employee with id:', id);
     if (!ObjectId.isValid(id)) {
         return res.status(400).send(`No record found with given id:  ${id}`);
     }
@@ -35,7 +37,7 @@ router.post('/', (req, res) => {
         office: req.body.office,
         salary: req.body.salary
     });
-
+    console.log('trying to save a new employee:', JSON.stringify(emp));
     emp.save((err, docs) => {
         if (!err) {
             return res.send(docs);
@@ -47,6 +49,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
     const id = req.body._id;
+    console.log('trying to update an employee with id:', id);
     if (!id || !ObjectId.isValid(id)) {
         return res.status(400).send(`No record found with given id:  ${id}`);
     }
@@ -63,6 +66,7 @@ router.put('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
+    console.log('trying to update an employee with id:', id);
     if (!ObjectId.isValid(id)) {
         return res.status(400).send(`No record found with given id:  ${id}`);
     }
